@@ -1,41 +1,600 @@
-Create a modern, mobile-friendly, highly interactive landing page for "Hotel Raj".
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MenuSpeach - AI Talking Menu System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF7B2E;
+            --secondary-yellow: #FFD166;
+            --dark-bg: #121212;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --text-light: #FFFFFF;
+            --text-gray: #E0E0E0;
+        }
 
-Requirements:
-1. Hero Section:
-   - Stylish header with the name "Hotel Raj".
-   - Tagline: "Delicious Food, Served Fresh Everyday".
-   - Background animation or subtle food-themed graphics.
-   - Prominent "Scan QR to Explore Menu" section with QR code image placeholder.
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-2. Digital Menu Section:
-   - Display food items in interactive animated cards (hover effects, flip animation, or fade-in).
-   - Each card should show:
-     - Food Image
-     - Dish Name
-     - Short Description
-     - Price
-     - "Order Now" button linking to WhatsApp (+91 9284969878).
-   - Example menu items: Veg Pizza (₹199), Cheese Burger (₹149), White Sauce Pasta (₹179), Cold Coffee (₹99).
+        body {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
 
-3. About Section:
-   - Short description about Hotel Raj.
-   - Highlight points like "Fresh Ingredients", "Family Friendly", "Fast Service".
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-4. Animation & Interactivity:
-   - Smooth scroll animations.
-   - Menu cards should appear with fade/slide effects.
-   - Call-to-action buttons with hover color transitions.
-   - QR code image with a glowing border animation.
+        /* Glassmorphism effect */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-5. Call to Action Section:
-   - A bold text banner: "Order Now on WhatsApp" with a clickable WhatsApp button.
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(255, 123, 46, 0.2);
+        }
 
-6. Footer:
-   - Text: "Powered by MenuSpeak | For your own digital menu, contact: +91 9284969878".
-   - Minimal and clean style.
+        /* Header & Navigation */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
 
-Design Style:
-- Colors: Red (#ff3131), Orange (#ff914d), White background, modern black text.
-- Fonts: Clean and modern (e.g., Poppins, Inter, or Montserrat).
-- Layout: Grid-based, responsive for mobile & desktop.
-- Animations: Smooth, modern, not overdone.
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            text-align: center;
+            background: radial-gradient(circle at top right, rgba(255, 123, 46, 0.2), transparent 400px),
+                        radial-gradient(circle at bottom left, rgba(255, 209, 102, 0.15), transparent 400px);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary-orange), var(--secondary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-orange), var(--secondary-yellow));
+            color: var(--dark-bg);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 123, 46, 0.4);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--text-light);
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .step-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(to right, var(--primary-orange), var(--secondary-yellow));
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-orange);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: radial-gradient(circle at top left, rgba(255, 209, 102, 0.1), transparent 500px);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            min-width: 60px;
+        }
+
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+        }
+
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .pricing-card {
+            flex: 1;
+            max-width: 350px;
+            text-align: center;
+            padding: 40px 30px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: var(--secondary-yellow);
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .features-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            color: var(--secondary-yellow);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: radial-gradient(circle at bottom right, rgba(255, 123, 46, 0.1), transparent 500px);
+        }
+
+        .testimonial-cards {
+            display: flex;
+            gap: 30px;
+        }
+
+        .testimonial {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-orange);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 100px 0;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-orange);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0 30px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        .branding {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .steps, .features-grid, .pricing-cards, .testimonial-cards {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">MenuSpeach</div>
+                <div class="nav-links">
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Give Voice to Your Menu with MenuSpeach</h1>
+            <p>Transform your restaurant menu into an interactive talking experience.</p>
+            <a href="#pricing" class="cta-button">Get Started Today</a>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step glass-card">
+                    <div class="step-number">1</div>
+                    <h3>Upload your menu</h3>
+                    <p>Simply upload an image of your menu or provide your website URL.</p>
+                </div>
+                <div class="step glass-card">
+                    <div class="step-number">2</div>
+                    <h3>Add voice greeting</h3>
+                    <p>Personalize your menu with a custom voice greeting and offers.</p>
+                </div>
+                <div class="step glass-card">
+                    <div class="step-number">3</div>
+                    <h3>Share QR code</h3>
+                    <p>Share your unique talking menu QR code with customers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Talking QR Code</h3>
+                        <p>Customers scan to hear your menu come to life with professional voice narration.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Auto-play Voice Greetings</h3>
+                        <p>Welcome customers with personalized voice messages and special offers.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Interactive Digital Menu</h3>
+                        <p>Zoomable, high-resolution menu with easy navigation and categories.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>WhatsApp Integration</h3>
+                        <p>Allow customers to easily place orders or make inquiries via WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple Pricing</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card glass-card">
+                    <h3 class="plan-name">Basic</h3>
+                    <div class="price">₹199</div>
+                    <ul class="features-list">
+                        <li>Menu JPG to Talking Menu</li>
+                        <li>Professional Voice Tone</li>
+                        <li>Basic QR Code</li>
+                        <li>7 Days Support</li>
+                    </ul>
+                    <a href="#" class="cta-button">Get Started</a>
+                </div>
+                <div class="pricing-card glass-card">
+                    <h3 class="plan-name">Standard</h3>
+                    <div class="price">₹499</div>
+                    <ul class="features-list">
+                        <li>Menu JPG to Talking Menu</li>
+                        <li>Custom Voice Greeting</li>
+                        <li>Special Offers Announcement</li>
+                        <li>30 Days Support</li>
+                    </ul>
+                    <a href="#" class="cta-button">Get Started</a>
+                </div>
+                <div class="pricing-card glass-card">
+                    <h3 class="plan-name">Premium</h3>
+                    <div class="price">₹999</div>
+                    <ul class="features-list">
+                        <li>Full Menu Website</li>
+                        <li>Custom Voice Greeting</li>
+                        <li>Special Offers Announcement</li>
+                        <li>WhatsApp Integration</li>
+                        <li>90 Days Support</li>
+                    </ul>
+                    <a href="#" class="cta-button">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-cards">
+                <div class="testimonial glass-card">
+                    <p class="testimonial-text">"MenuSpeach has transformed how our customers interact with our menu. Orders have increased by 30% since implementation!"</p>
+                    <p class="testimonial-author">- Raj Sharma, Mumbai Restaurant Owner</p>
+                </div>
+                <div class="testimonial glass-card">
+                    <p class="testimonial-text">"The setup was incredibly easy, and our customers love the interactive experience. The WhatsApp integration has been a game-changer for takeaway orders."</p>
+                    <p class="testimonial-author">- Priya Patel, Delhi Café Owner</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item glass-card">
+                    <h3 class="faq-question">How long does it take to set up my talking menu?</h3>
+                    <p>Typically, we can have your talking menu ready within 24 hours of receiving your menu details and voice preferences.</p>
+                </div>
+                <div class="faq-item glass-card">
+                    <h3 class="faq-question">What payment methods do you accept?</h3>
+                    <p>We accept all major credit cards, UPI, and bank transfers.</p>
+                </div>
+                <div class="faq-item glass-card">
+                    <h3 class="faq-question">Can I update my menu or offers later?</h3>
+                    <p>Yes, you can update your menu items and offers at any time with our easy-to-use dashboard.</p>
+                </div>
+                <div class="faq-item glass-card">
+                    <h3 class="faq-question">Do you provide technical support?</h3>
+                    <p>Yes, we provide support based on your plan. Premium plans include priority support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> 📞 9284969878</p>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fas fa-globe"></i></a>
+                </div>
+            </div>
+            <div class="branding">
+                <p>Powered by Cre8ive Graphics</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.glass-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
